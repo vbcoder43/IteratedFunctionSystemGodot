@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfssnrn5n22je"]
+
+[ext_resource type="Script" path="res://IFS2D/scripts/ifs_2d.gd" id="1_spt0n"]
+[ext_resource type="Shader" path="res://IFS2D/shaders/IFS2D.gdshader" id="2_uy6ol"]
+[ext_resource type="Texture2D" uid="uid://b82vdm3iqb2sh" path="res://Sprite-0001.png" id="3_1oueo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nk2db"]
+shader = ExtResource("2_uy6ol")
+shader_parameter/compute = true
+shader_parameter/function_count = 7
+shader_parameter/affine_0 = Basis(0.443925, 0.0865379, 156.76, -0.0240594, 0.462712, -60.528, 0, 0, 1)
+shader_parameter/affine_1 = Basis(0.793712, -0.0240171, -162.028, -0.131457, 0.732159, -35.607, 0, 0, 1)
+shader_parameter/affine_2 = Basis(0.572019, 0.00241594, 156.959, -0.12757, 0.470073, 18.1869, 0, 0, 1)
+shader_parameter/affine_3 = Basis(0.796516, -0.0781091, -45.7086, 0.0547695, 0.559643, 29.4006, 0, 0, 1)
+shader_parameter/affine_4 = Basis(0.673814, -0.126683, -181.653, -0.077364, 0.725322, -87.5695, 0, 0, 1)
+shader_parameter/affine_5 = Basis(0.562015, -0.0753771, -124.161, 0.0343576, 0.755927, 65.557, 0, 0, 1)
+shader_parameter/affine_6 = Basis(0.607372, 0.0419833, 98.2196, 0.0994877, 0.799081, -17.767, 0, 0, 1)
+shader_parameter/affine_7 = Basis(0.501261, -0.0991482, -169.274, -0.11009, 0.496713, 92.4203, 0, 0, 1)
+shader_parameter/hash_time_constant = 10000.0
+
+[node name="Ifs2d" type="Node2D"]
+script = ExtResource("1_spt0n")
+gen_type = 1
+function_count = 7
+jump_ratio_min = 0.4
+jump_ratio_max = 0.8
+translate_min = Vector2(-200, -100)
+translate_max = Vector2(200, 100)
+scaling_min = Vector2(1, 1)
+scaling_max = Vector2(1, 1)
+shear_min = Vector2(-0.15, -0.15)
+shear_max = Vector2(0.15, 0.15)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -2192.0
+offset_top = -916.0
+offset_right = 1923.0
+offset_bottom = 1084.0
+color = Color(0, 0, 0, 1)
+
+[node name="ifs1" type="GPUParticles2D" parent="."]
+amount = 1000000
+process_material = SubResource("ShaderMaterial_nk2db")
+texture = ExtResource("3_1oueo")
+fixed_fps = 60
+visibility_rect = Rect2(-900, -500, 1600, 1000)
+local_coords = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
