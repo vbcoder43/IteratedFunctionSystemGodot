@@ -28,21 +28,35 @@ func generate_affines():
 	if(gen_type == 0): # sierpinskie triangle
 		function_count = 3
 		for i in range(len(affine_arr)):
-			affine_arr[i] = Basis(Vector3(randf_range(jump_ratio_min, jump_ratio_max), 0.0, 0.0),
-							Vector3(0.0, randf_range(jump_ratio_min, jump_ratio_max), 0.0),
-							Vector3(randf_range(translate_min.x, translate_max.x), randf_range(translate_min.y, translate_max.y), 0.0))
+			affine_arr[i] = Basis(
+				Vector3(randf_range(jump_ratio_min, jump_ratio_max), 0.0, 0.0),
+				Vector3(0.0, randf_range(jump_ratio_min, jump_ratio_max), 0.0),
+				Vector3(randf_range(translate_min.x, translate_max.x), randf_range(translate_min.y, translate_max.y), 1.0)
+				)
 	if(gen_type == 1): # freeform
 		for i in range(len(affine_arr)):
+			# translation and scaling
 			affine_arr[i] = Basis(
-				Vector3(randf_range(jump_ratio_min, jump_ratio_max)*randf_range(scaling_min.x, scaling_max.x),
-				randf_range(shear_min.y, shear_max.y),
-				0.0),
-				Vector3(randf_range(shear_min.x, shear_max.x),
-				randf_range(jump_ratio_min, jump_ratio_max)*randf_range(scaling_min.y, scaling_max.y),
-				0.0),
-				Vector3(randf_range(translate_min.x, translate_max.x),
-				randf_range(translate_min.y, translate_max.y),
-				1.0))
+				Vector3(randf_range(scaling_min.x, scaling_max.x), 0.0, 0.0),
+				Vector3(0.0, randf_range(scaling_min.y, scaling_max.y), 0.0),
+				Vector3(randf_range(translate_min.x, translate_max.x), randf_range(translate_min.y, translate_max.y), 1.0)
+				)
+			# shears combined (mat3 formation precalculated)
+			var shear_h = randf_range(shear_min.y, shear_max.y)
+			var shear_v = randf_range(shear_min.x, shear_max.x)
+			affine_arr[i] *= Basis(
+				Vector3(1.0, shear_h, 0.0),
+				Vector3(shear_v, shear_h*shear_v+1, 0.0),
+				Vector3(0.0, 0.0, 1.0)
+			)
+			# rotation
+			var angle_sin = sin(randf_range(deg_to_rad(rotation_deg_min),deg_to_rad(rotation_deg_max)))
+			var angle_cos = cos(randf_range(deg_to_rad(rotation_deg_min),deg_to_rad(rotation_deg_max)))
+			affine_arr[i] *= Basis(
+				Vector3(angle_cos, angle_sin, 0.0),
+				Vector3(-angle_sin, angle_cos, 0.0),
+				Vector3(0.0, 0.0, 1.0)
+			)
 
 func apply_affines():
 	for i in range(len(batch)):

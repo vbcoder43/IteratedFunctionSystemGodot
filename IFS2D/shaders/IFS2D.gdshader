@@ -57,8 +57,8 @@ void process() { if(compute){
 						affine_4, affine_5, affine_6, affine_7};
 	
 	affine_index = int(rand_from_seed(alt_seed)*float(function_count)-0.00001);
-	
-	TRANSFORM[3].xy = (affine_arr[affine_index] * TRANSFORM[3].xyw).xy;
+	vec2 dest = (affine_arr[affine_index] * TRANSFORM[3].xyw).xy;
+	TRANSFORM[3].xy = dest;
 }}
 
 
