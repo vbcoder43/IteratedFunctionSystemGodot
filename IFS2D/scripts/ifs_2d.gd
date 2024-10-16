@@ -1,7 +1,7 @@
 @tool
 extends Node2D
 
-@onready var batch := [$ifs1]
+@onready var batch := [$ifs1, $ifs2, $ifs3, $ifs4, $ifs5]
 var compute := true
 @export var gen_type := 0
 @export var function_count := 3
@@ -67,7 +67,8 @@ func apply_affines():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	for i in batch:
+		i.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -75,3 +76,9 @@ func _process(delta):
 	if(Input.is_action_just_pressed("ui_end")):
 		generate_affines()
 		apply_affines()
+
+
+func _on_timer_timeout():
+	$Timer.start(3.0)
+	generate_affines()
+	apply_affines()
