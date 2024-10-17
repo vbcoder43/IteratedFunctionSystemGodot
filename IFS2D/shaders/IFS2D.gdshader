@@ -1,5 +1,5 @@
 shader_type particles;
-render_mode disable_velocity;
+render_mode disable_velocity, keep_data;
 
 uniform bool compute = true;
 group_uniforms affine_transformations;
@@ -57,6 +57,8 @@ void process() { if(compute){
 						affine_4, affine_5, affine_6, affine_7};
 	
 	affine_index = int(rand_from_seed(alt_seed)*float(function_count)-0.00001);
+	float epsilon = 0.00001;
+	float decay = 250.0;
 	vec2 dest = (affine_arr[affine_index] * TRANSFORM[3].xyw).xy;
 	TRANSFORM[3].xy = dest;
 }}

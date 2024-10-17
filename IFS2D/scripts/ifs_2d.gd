@@ -73,12 +73,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	InputMap.load_from_project_settings()
-	if(Input.is_action_just_pressed("ui_end")):
+	if(Input.is_action_just_pressed("ui_end") && Engine.is_editor_hint()):
+		generate_affines()
+		apply_affines()
+	elif(Input.is_action_just_pressed("ui_accept") && !Engine.is_editor_hint()):
 		generate_affines()
 		apply_affines()
 
 
 func _on_timer_timeout():
-	$Timer.start(3.0)
-	generate_affines()
-	apply_affines()
+	if($CanvasLayer/CheckButton.button_pressed):
+		generate_affines()
+		apply_affines()

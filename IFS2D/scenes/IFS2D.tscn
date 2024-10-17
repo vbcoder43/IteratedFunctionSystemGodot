@@ -1,76 +1,78 @@
-[gd_scene load_steps=8 format=3 uid="uid://cfssnrn5n22je"]
+[gd_scene load_steps=9 format=3 uid="uid://cfssnrn5n22je"]
 
 [ext_resource type="Script" path="res://IFS2D/scripts/ifs_2d.gd" id="1_spt0n"]
 [ext_resource type="Shader" path="res://IFS2D/shaders/IFS2D.gdshader" id="2_uy6ol"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nxpku"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nk2db"]
 shader = ExtResource("2_uy6ol")
 shader_parameter/compute = true
 shader_parameter/function_count = 5
-shader_parameter/affine_0 = Basis(0.557115, 0.484524, -152.809, -0.263939, 0.378874, 2.97817, 0, 0, 1)
-shader_parameter/affine_1 = Basis(0.448271, 0.0471117, 375.789, -0.175175, 0.659362, -77.5831, 0, 0, 1)
-shader_parameter/affine_2 = Basis(0.754196, -0.162742, -373.389, 0.242236, 0.581502, 34.1736, 0, 0, 1)
-shader_parameter/affine_3 = Basis(0.422811, -0.169632, -34.8487, 0.0879273, 0.420303, 35.8811, 0, 0, 1)
-shader_parameter/affine_4 = Basis(0.578173, 0.12543, -142.539, -0.0259449, 0.64252, -45.3032, 0, 0, 1)
-shader_parameter/affine_5 = Basis(0.527432, -0.0823769, -132.47, 0.303298, 0.521185, 34.1616, 0, 0, 1)
-shader_parameter/affine_6 = Basis(0.553811, 0.221642, -357.914, 0.0364384, 0.598311, 0.615341, 0, 0, 1)
-shader_parameter/affine_7 = Basis(0.521061, -0.170554, 334.158, 0.292534, 0.556523, -57.6279, 0, 0, 1)
+shader_parameter/affine_0 = Basis(0.703649, -0.458441, 190.876, 0.327672, 0.439593, 46.8771, 0, 0, 1)
+shader_parameter/affine_1 = Basis(0.409636, -0.0636125, 41.4426, 0.0729226, 0.379227, 88.4136, 0, 0, 1)
+shader_parameter/affine_2 = Basis(0.592103, -0.300513, -299.911, 0.385243, 0.61493, 24.6347, 0, 0, 1)
+shader_parameter/affine_3 = Basis(0.659908, 0.0521172, -110.755, 0.229955, 0.709971, 78.4385, 0, 0, 1)
+shader_parameter/affine_4 = Basis(0.441709, 0.443729, 152.239, -0.335711, 0.433781, -36.3276, 0, 0, 1)
+shader_parameter/affine_5 = Basis(0.48121, -0.314952, -398.157, 0.470325, 0.315549, -48.8638, 0, 0, 1)
+shader_parameter/affine_6 = Basis(0.312198, 0.595391, -392.984, -0.403517, 0.394308, 84.5913, 0, 0, 1)
+shader_parameter/affine_7 = Basis(0.223878, -0.319106, -372.37, 0.328566, 0.247897, -91.2187, 0, 0, 1)
 shader_parameter/hash_time_constant = 10000.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gym5p"]
 shader = ExtResource("2_uy6ol")
 shader_parameter/compute = true
 shader_parameter/function_count = 5
-shader_parameter/affine_0 = Basis(0.440811, 0.525064, 269.496, -0.354684, 0.37736, -78.7505, 0, 0, 1)
-shader_parameter/affine_1 = Basis(0.628141, 0.101247, 192.034, -0.11349, 0.797677, 96.4946, 0, 0, 1)
-shader_parameter/affine_2 = Basis(0.656527, -0.285754, 254.486, 0.189259, 0.623136, 88.7284, 0, 0, 1)
-shader_parameter/affine_3 = Basis(0.623093, 0.0833117, -210.292, -0.0786647, 0.807992, -15.9714, 0, 0, 1)
-shader_parameter/affine_4 = Basis(0.604585, 0.102064, -365.192, -0.29826, 0.712172, 57.0718, 0, 0, 1)
-shader_parameter/affine_5 = Basis(0.537203, -0.314985, 107.102, 0.2986, 0.669764, 30.0878, 0, 0, 1)
-shader_parameter/affine_6 = Basis(0.691634, 0.225094, -294.515, -0.176702, 0.369631, -12.4271, 0, 0, 1)
-shader_parameter/affine_7 = Basis(0.431151, -0.0519056, -155.68, -0.198265, 0.729821, -78.9075, 0, 0, 1)
+shader_parameter/affine_0 = Basis(0.703649, -0.458441, 190.876, 0.327672, 0.439593, 46.8771, 0, 0, 1)
+shader_parameter/affine_1 = Basis(0.409636, -0.0636125, 41.4426, 0.0729226, 0.379227, 88.4136, 0, 0, 1)
+shader_parameter/affine_2 = Basis(0.592103, -0.300513, -299.911, 0.385243, 0.61493, 24.6347, 0, 0, 1)
+shader_parameter/affine_3 = Basis(0.659908, 0.0521172, -110.755, 0.229955, 0.709971, 78.4385, 0, 0, 1)
+shader_parameter/affine_4 = Basis(0.441709, 0.443729, 152.239, -0.335711, 0.433781, -36.3276, 0, 0, 1)
+shader_parameter/affine_5 = Basis(0.48121, -0.314952, -398.157, 0.470325, 0.315549, -48.8638, 0, 0, 1)
+shader_parameter/affine_6 = Basis(0.312198, 0.595391, -392.984, -0.403517, 0.394308, 84.5913, 0, 0, 1)
+shader_parameter/affine_7 = Basis(0.223878, -0.319106, -372.37, 0.328566, 0.247897, -91.2187, 0, 0, 1)
 shader_parameter/hash_time_constant = 23455.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ahclp"]
 shader = ExtResource("2_uy6ol")
 shader_parameter/compute = true
 shader_parameter/function_count = 5
-shader_parameter/affine_0 = Basis(0.440811, 0.525064, 269.496, -0.354684, 0.37736, -78.7505, 0, 0, 1)
-shader_parameter/affine_1 = Basis(0.628141, 0.101247, 192.034, -0.11349, 0.797677, 96.4946, 0, 0, 1)
-shader_parameter/affine_2 = Basis(0.656527, -0.285754, 254.486, 0.189259, 0.623136, 88.7284, 0, 0, 1)
-shader_parameter/affine_3 = Basis(0.623093, 0.0833117, -210.292, -0.0786647, 0.807992, -15.9714, 0, 0, 1)
-shader_parameter/affine_4 = Basis(0.604585, 0.102064, -365.192, -0.29826, 0.712172, 57.0718, 0, 0, 1)
-shader_parameter/affine_5 = Basis(0.537203, -0.314985, 107.102, 0.2986, 0.669764, 30.0878, 0, 0, 1)
-shader_parameter/affine_6 = Basis(0.691634, 0.225094, -294.515, -0.176702, 0.369631, -12.4271, 0, 0, 1)
-shader_parameter/affine_7 = Basis(0.431151, -0.0519056, -155.68, -0.198265, 0.729821, -78.9075, 0, 0, 1)
+shader_parameter/affine_0 = Basis(0.703649, -0.458441, 190.876, 0.327672, 0.439593, 46.8771, 0, 0, 1)
+shader_parameter/affine_1 = Basis(0.409636, -0.0636125, 41.4426, 0.0729226, 0.379227, 88.4136, 0, 0, 1)
+shader_parameter/affine_2 = Basis(0.592103, -0.300513, -299.911, 0.385243, 0.61493, 24.6347, 0, 0, 1)
+shader_parameter/affine_3 = Basis(0.659908, 0.0521172, -110.755, 0.229955, 0.709971, 78.4385, 0, 0, 1)
+shader_parameter/affine_4 = Basis(0.441709, 0.443729, 152.239, -0.335711, 0.433781, -36.3276, 0, 0, 1)
+shader_parameter/affine_5 = Basis(0.48121, -0.314952, -398.157, 0.470325, 0.315549, -48.8638, 0, 0, 1)
+shader_parameter/affine_6 = Basis(0.312198, 0.595391, -392.984, -0.403517, 0.394308, 84.5913, 0, 0, 1)
+shader_parameter/affine_7 = Basis(0.223878, -0.319106, -372.37, 0.328566, 0.247897, -91.2187, 0, 0, 1)
 shader_parameter/hash_time_constant = 34568.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_psvqa"]
 shader = ExtResource("2_uy6ol")
 shader_parameter/compute = true
 shader_parameter/function_count = 5
-shader_parameter/affine_0 = Basis(0.440811, 0.525064, 269.496, -0.354684, 0.37736, -78.7505, 0, 0, 1)
-shader_parameter/affine_1 = Basis(0.628141, 0.101247, 192.034, -0.11349, 0.797677, 96.4946, 0, 0, 1)
-shader_parameter/affine_2 = Basis(0.656527, -0.285754, 254.486, 0.189259, 0.623136, 88.7284, 0, 0, 1)
-shader_parameter/affine_3 = Basis(0.623093, 0.0833117, -210.292, -0.0786647, 0.807992, -15.9714, 0, 0, 1)
-shader_parameter/affine_4 = Basis(0.604585, 0.102064, -365.192, -0.29826, 0.712172, 57.0718, 0, 0, 1)
-shader_parameter/affine_5 = Basis(0.537203, -0.314985, 107.102, 0.2986, 0.669764, 30.0878, 0, 0, 1)
-shader_parameter/affine_6 = Basis(0.691634, 0.225094, -294.515, -0.176702, 0.369631, -12.4271, 0, 0, 1)
-shader_parameter/affine_7 = Basis(0.431151, -0.0519056, -155.68, -0.198265, 0.729821, -78.9075, 0, 0, 1)
+shader_parameter/affine_0 = Basis(0.703649, -0.458441, 190.876, 0.327672, 0.439593, 46.8771, 0, 0, 1)
+shader_parameter/affine_1 = Basis(0.409636, -0.0636125, 41.4426, 0.0729226, 0.379227, 88.4136, 0, 0, 1)
+shader_parameter/affine_2 = Basis(0.592103, -0.300513, -299.911, 0.385243, 0.61493, 24.6347, 0, 0, 1)
+shader_parameter/affine_3 = Basis(0.659908, 0.0521172, -110.755, 0.229955, 0.709971, 78.4385, 0, 0, 1)
+shader_parameter/affine_4 = Basis(0.441709, 0.443729, 152.239, -0.335711, 0.433781, -36.3276, 0, 0, 1)
+shader_parameter/affine_5 = Basis(0.48121, -0.314952, -398.157, 0.470325, 0.315549, -48.8638, 0, 0, 1)
+shader_parameter/affine_6 = Basis(0.312198, 0.595391, -392.984, -0.403517, 0.394308, 84.5913, 0, 0, 1)
+shader_parameter/affine_7 = Basis(0.223878, -0.319106, -372.37, 0.328566, 0.247897, -91.2187, 0, 0, 1)
 shader_parameter/hash_time_constant = 48564.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_n764r"]
 shader = ExtResource("2_uy6ol")
 shader_parameter/compute = true
 shader_parameter/function_count = 5
-shader_parameter/affine_0 = Basis(0.440811, 0.525064, 269.496, -0.354684, 0.37736, -78.7505, 0, 0, 1)
-shader_parameter/affine_1 = Basis(0.628141, 0.101247, 192.034, -0.11349, 0.797677, 96.4946, 0, 0, 1)
-shader_parameter/affine_2 = Basis(0.656527, -0.285754, 254.486, 0.189259, 0.623136, 88.7284, 0, 0, 1)
-shader_parameter/affine_3 = Basis(0.623093, 0.0833117, -210.292, -0.0786647, 0.807992, -15.9714, 0, 0, 1)
-shader_parameter/affine_4 = Basis(0.604585, 0.102064, -365.192, -0.29826, 0.712172, 57.0718, 0, 0, 1)
-shader_parameter/affine_5 = Basis(0.537203, -0.314985, 107.102, 0.2986, 0.669764, 30.0878, 0, 0, 1)
-shader_parameter/affine_6 = Basis(0.691634, 0.225094, -294.515, -0.176702, 0.369631, -12.4271, 0, 0, 1)
-shader_parameter/affine_7 = Basis(0.431151, -0.0519056, -155.68, -0.198265, 0.729821, -78.9075, 0, 0, 1)
+shader_parameter/affine_0 = Basis(0.703649, -0.458441, 190.876, 0.327672, 0.439593, 46.8771, 0, 0, 1)
+shader_parameter/affine_1 = Basis(0.409636, -0.0636125, 41.4426, 0.0729226, 0.379227, 88.4136, 0, 0, 1)
+shader_parameter/affine_2 = Basis(0.592103, -0.300513, -299.911, 0.385243, 0.61493, 24.6347, 0, 0, 1)
+shader_parameter/affine_3 = Basis(0.659908, 0.0521172, -110.755, 0.229955, 0.709971, 78.4385, 0, 0, 1)
+shader_parameter/affine_4 = Basis(0.441709, 0.443729, 152.239, -0.335711, 0.433781, -36.3276, 0, 0, 1)
+shader_parameter/affine_5 = Basis(0.48121, -0.314952, -398.157, 0.470325, 0.315549, -48.8638, 0, 0, 1)
+shader_parameter/affine_6 = Basis(0.312198, 0.595391, -392.984, -0.403517, 0.394308, 84.5913, 0, 0, 1)
+shader_parameter/affine_7 = Basis(0.223878, -0.319106, -372.37, 0.328566, 0.247897, -91.2187, 0, 0, 1)
 shader_parameter/hash_time_constant = 65451.0
 
 [node name="Ifs2d" type="Node2D"]
@@ -83,8 +85,33 @@ scaling_min = Vector2(0.42, 0.42)
 scaling_max = Vector2(0.72, 0.72)
 shear_min = Vector2(-0.31, -0.31)
 shear_max = Vector2(0.31, 0.31)
-rotation_deg_min = -45.0
-rotation_deg_max = 45.0
+rotation_deg_min = -60.0
+rotation_deg_max = 60.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CheckButton" type="CheckButton" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -166.0
+offset_bottom = 73.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 36
+text = "AUTO"
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "PRESS [SPACE] TO GENERATE NEW SET"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -3179.0
@@ -94,6 +121,7 @@ offset_bottom = 1795.0
 color = Color(0, 0, 0, 1)
 
 [node name="ifs1" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_nxpku")
 amount = 1000000
 process_material = SubResource("ShaderMaterial_nk2db")
 fixed_fps = 60
@@ -136,7 +164,7 @@ local_coords = true
 zoom = Vector2(0.8, 0.8)
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 1.3
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
