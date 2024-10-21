@@ -7,14 +7,14 @@ uniform float green : hint_range(0.0, 1.0, 0.001) = 0.5;
 uniform float blue : hint_range(0.0, 1.0, 0.001) = 0.5;
 group_uniforms affine_transformations;
 uniform uint function_count = 3;
-uniform mat3 affine_0;
-uniform mat3 affine_1;
-uniform mat3 affine_2;
-uniform mat3 affine_3;
-uniform mat3 affine_4;
-uniform mat3 affine_5;
-uniform mat3 affine_6;
-uniform mat3 affine_7;
+uniform mat4 affine_0;
+uniform mat4 affine_1;
+uniform mat4 affine_2;
+uniform mat4 affine_3;
+uniform mat4 affine_4;
+uniform mat4 affine_5;
+uniform mat4 affine_6;
+uniform mat4 affine_7;
 
 group_uniforms randomness;
 uniform float hash_time_constant = 10000;
@@ -62,12 +62,12 @@ void process() { if(compute){
 		0.35
 	);
 	int affine_index = 0;
-	mat3 affine_arr[] = {affine_0, affine_1, affine_2, affine_3,
+	mat4 affine_arr[] = {affine_0, affine_1, affine_2, affine_3,
 						affine_4, affine_5, affine_6, affine_7};
 
 	affine_index = int(rand_from_seed(alt_seed)*float(function_count)-0.00001);
 	float epsilon = 0.00001;
 	float decay = 250.0;
-	vec2 dest = (affine_arr[affine_index] * TRANSFORM[3].xyw).xy;
-	TRANSFORM[3].xy = dest;
+	vec3 dest = (affine_arr[affine_index] * TRANSFORM[3].xyzw).xyz;
+	TRANSFORM[3].xyz = dest;
 }}

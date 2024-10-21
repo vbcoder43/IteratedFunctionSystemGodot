@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://qgr7qt2hqcok"]
+
+[ext_resource type="Script" path="res://IFS3D/scripts/ifs_3d.gd" id="1_28hu1"]
+[ext_resource type="Shader" path="res://IFS3D/shaders/IFS3D.gdshader" id="2_5251f"]
+[ext_resource type="Script" path="res://IFS3D/scripts/camera.gd" id="3_hoa23"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3eipq"]
+shader = ExtResource("2_5251f")
+shader_parameter/compute = true
+shader_parameter/red = 0.5
+shader_parameter/green = 0.5
+shader_parameter/blue = 0.5
+shader_parameter/function_count = 5
+shader_parameter/affine_0 = Projection(0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.5, 0, 0, 5, 0, 1)
+shader_parameter/affine_1 = Projection(0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.5, 0, 5, 0, 5, 1)
+shader_parameter/affine_2 = Projection(0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.5, 0, 5, 0, -5, 1)
+shader_parameter/affine_3 = Projection(0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.5, 0, -5, 0, 5, 1)
+shader_parameter/affine_4 = Projection(0.5, 0, 0, 0, 0, 0.5, 0, 0, 0, 0, 0.5, 0, -5, 0, -5, 1)
+shader_parameter/affine_5 = null
+shader_parameter/affine_6 = null
+shader_parameter/affine_7 = null
+shader_parameter/hash_time_constant = 10000.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_qc1oe"]
+size = Vector2(0.01, 0.01)
+
+[sub_resource type="Environment" id="Environment_nc32o"]
+
+[node name="Ifs3d" type="Node3D"]
+script = ExtResource("1_28hu1")
+function_count = 5
+translate_min = Vector3(-5, -5, -5)
+translate_max = Vector3(5, 5, 5)
+
+[node name="ifs1" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.52432)
+amount = 1000000
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ShaderMaterial_3eipq")
+draw_pass_1 = SubResource("QuadMesh_qc1oe")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.96371, 0.266952, 0, -0.266952, 0.96371, 0, 4.74048, 7.73356)
+environment = SubResource("Environment_nc32o")
+current = true
+script = ExtResource("3_hoa23")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.821109, 0.570771, 0, -0.570771, 0.821109, 0, 2.06174, 5.92599)
