@@ -16,7 +16,6 @@ var compute := true
 @export var shear_max := Vector3.ZERO
 @export var rotation_deg_min := Vector3.ZERO
 @export var rotation_deg_max := Vector3.ZERO
-@export var test := Transform3D.IDENTITY
 
 var affine_arr := [Transform3D.IDENTITY, Transform3D.IDENTITY, Transform3D.IDENTITY,
 				Transform3D.IDENTITY, Transform3D.IDENTITY, Transform3D.IDENTITY,
@@ -47,8 +46,8 @@ func generate_affines():
 				Vector3(tx, 0.0, 0.0),
 				Vector3(0.0, ty, 0.0),
 				Vector3(0.0, 0.0, tz),
-				Vector3(tx*randf_range(translate_min.x, translate_max.x), ty*randf_range(translate_min.y, translate_max.y),
-				tz*randf_range(translate_min.z, translate_max.z))
+				Vector3(randf_range(translate_min.x, translate_max.x), randf_range(translate_min.y, translate_max.y),
+				randf_range(translate_min.z, translate_max.z))
 				)
 			# shears combined (mat3 formation precalculated)
 			var shear_x = randf_range(shear_min.x, shear_max.x)

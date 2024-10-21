@@ -42,7 +42,7 @@ func generate_affines():
 			affine_arr[i] = Basis(
 				Vector3(tx, 0.0, 0.0),
 				Vector3(0.0, ty, 0.0),
-				Vector3(tx*randf_range(translate_min.x, translate_max.x), ty*randf_range(translate_min.y, translate_max.y), 1.0)
+				Vector3(randf_range(translate_min.x, translate_max.x), randf_range(translate_min.y, translate_max.y), 1.0)
 				)
 			# shears combined (mat3 formation precalculated)
 			var shear_h = randf_range(shear_min.y, shear_max.y)
