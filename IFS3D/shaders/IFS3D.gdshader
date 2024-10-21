@@ -68,7 +68,7 @@ void process() { if(compute){
 	affine_index = int(rand_from_seed(alt_seed)*float(function_count)-0.00001);
 	float epsilon = 0.00001;
 	float decay = 250.0;
-	vec3 dest = (affine_arr[affine_index] * TRANSFORM[3].xyzw).xyz;
+	vec3 dest = (affine_arr[affine_index] * TRANSFORM[3]).xyz;
 	TRANSFORM[3].xyz = dest;
 	
 }}

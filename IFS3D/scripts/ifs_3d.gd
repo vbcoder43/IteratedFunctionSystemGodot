@@ -16,6 +16,7 @@ var compute := true
 @export var shear_max := Vector3.ZERO
 @export var rotation_deg_min := Vector3.ZERO
 @export var rotation_deg_max := Vector3.ZERO
+@export var test := Transform3D.IDENTITY
 
 var affine_arr := [Transform3D.IDENTITY, Transform3D.IDENTITY, Transform3D.IDENTITY,
 				Transform3D.IDENTITY, Transform3D.IDENTITY, Transform3D.IDENTITY,
@@ -23,27 +24,31 @@ var affine_arr := [Transform3D.IDENTITY, Transform3D.IDENTITY, Transform3D.IDENT
 var affine_names := ["affine_0", "affine_1", "affine_2", "affine_3",
 					"affine_4", "affine_5", "affine_6", "affine_7"]
 
-
+# 3D affines in godot are column major (Transform3D) but editor shows them as row major
 func generate_affines():
 	if(gen_type == 0): # sierpinskie triangle
 		function_count = 5
 		for i in range(len(affine_arr)):
+			var t = randf_range(jump_ratio_min, jump_ratio_max)
 			affine_arr[i] = Transform3D(
-				Vector3(randf_range(jump_ratio_min, jump_ratio_max), 0.0, 0.0),
-				Vector3(0.0, randf_range(jump_ratio_min, jump_ratio_max), 0.0),
-				Vector3(0.0, 0.0, randf_range(jump_ratio_min, jump_ratio_max)),
-				Vector3(randf_range(translate_min.x, translate_max.x), randf_range(translate_min.y, translate_max.y),
-				randf_range(translate_min.z, translate_max.z))
+				Vector3(t, 0.0, 0.0),
+				Vector3(0.0, t, 0.0),
+				Vector3(0.0, 0.0, t),
+				Vector3(t*randf_range(translate_min.x, translate_max.x), t*randf_range(translate_min.y, translate_max.y),
+				t*randf_range(translate_min.z, translate_max.z))
 				)
 	if(gen_type == 1): # freeform
 		for i in range(len(affine_arr)):
 			# translation and scaling
+			var tx = randf_range(scaling_min.x, scaling_max.x)
+			var ty = randf_range(scaling_min.y, scaling_max.y)
+			var tz = randf_range(scaling_min.z, scaling_max.z)
 			affine_arr[i] = Transform3D(
-				Vector3(randf_range(scaling_min.x, scaling_max.x), 0.0, 0.0),
-				Vector3(0.0, randf_range(scaling_min.y, scaling_max.y), 0.0),
-				Vector3(0.0, 0.0, randf_range(scaling_min.y, scaling_max.y)),
-				Vector3(randf_range(translate_min.x, translate_max.x), randf_range(translate_min.y, translate_max.y),
-				randf_range(translate_min.z, translate_max.z))
+				Vector3(tx, 0.0, 0.0),
+				Vector3(0.0, ty, 0.0),
+				Vector3(0.0, 0.0, tz),
+				Vector3(tx*randf_range(translate_min.x, translate_max.x), ty*randf_range(translate_min.y, translate_max.y),
+				tz*randf_range(translate_min.z, translate_max.z))
 				)
 			# shears combined (mat3 formation precalculated)
 			var shear_x = randf_range(shear_min.x, shear_max.x)

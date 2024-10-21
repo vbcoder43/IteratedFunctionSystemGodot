@@ -23,23 +23,26 @@ var affine_arr := [Basis.IDENTITY, Basis.IDENTITY, Basis.IDENTITY,
 var affine_names := ["affine_0", "affine_1", "affine_2", "affine_3",
 					"affine_4", "affine_5", "affine_6", "affine_7"]
 
-
+# 2D affines in godot are column major (Basis type)
 func generate_affines():
 	if(gen_type == 0): # sierpinskie triangle
 		function_count = 3
 		for i in range(len(affine_arr)):
+			var t = randf_range(jump_ratio_min, jump_ratio_max)
 			affine_arr[i] = Basis(
-				Vector3(randf_range(jump_ratio_min, jump_ratio_max), 0.0, 0.0),
-				Vector3(0.0, randf_range(jump_ratio_min, jump_ratio_max), 0.0),
-				Vector3(randf_range(translate_min.x, translate_max.x), randf_range(translate_min.y, translate_max.y), 1.0)
+				Vector3(t, 0.0, 0.0),
+				Vector3(0.0, t, 0.0),
+				Vector3(t*randf_range(translate_min.x, translate_max.x), t*randf_range(translate_min.y, translate_max.y), 1.0)
 				)
 	if(gen_type == 1): # freeform
 		for i in range(len(affine_arr)):
 			# translation and scaling
+			var tx = randf_range(scaling_min.x, scaling_max.x)
+			var ty = randf_range(scaling_min.y, scaling_max.y)
 			affine_arr[i] = Basis(
-				Vector3(randf_range(scaling_min.x, scaling_max.x), 0.0, 0.0),
-				Vector3(0.0, randf_range(scaling_min.y, scaling_max.y), 0.0),
-				Vector3(randf_range(translate_min.x, translate_max.x), randf_range(translate_min.y, translate_max.y), 1.0)
+				Vector3(tx, 0.0, 0.0),
+				Vector3(0.0, ty, 0.0),
+				Vector3(tx*randf_range(translate_min.x, translate_max.x), ty*randf_range(translate_min.y, translate_max.y), 1.0)
 				)
 			# shears combined (mat3 formation precalculated)
 			var shear_h = randf_range(shear_min.y, shear_max.y)
