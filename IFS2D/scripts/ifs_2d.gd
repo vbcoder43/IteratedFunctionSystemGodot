@@ -50,8 +50,9 @@ func generate_affines():
 				Vector3(0.0, 0.0, 1.0)
 			)
 			# rotation
-			var angle_sin = sin(randf_range(deg_to_rad(rotation_deg_min),deg_to_rad(rotation_deg_max)))
-			var angle_cos = cos(randf_range(deg_to_rad(rotation_deg_min),deg_to_rad(rotation_deg_max)))
+			var theta = randf_range(deg_to_rad(rotation_deg_min),deg_to_rad(rotation_deg_max))
+			var angle_sin = sin(theta)
+			var angle_cos = cos(theta)
 			affine_arr[i] *= Basis(
 				Vector3(angle_cos, angle_sin, 0.0),
 				Vector3(-angle_sin, angle_cos, 0.0),
