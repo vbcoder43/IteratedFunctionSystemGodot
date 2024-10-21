@@ -2,6 +2,9 @@ shader_type particles;
 render_mode disable_velocity, keep_data;
 
 uniform bool compute = true;
+uniform float red : hint_range(0.0, 1.0, 0.001) = 0.5;
+uniform float green : hint_range(0.0, 1.0, 0.001) = 0.5;
+uniform float blue : hint_range(0.0, 1.0, 0.001) = 0.5;
 group_uniforms affine_transformations;
 uniform uint function_count = 3;
 uniform mat3 affine_0;
@@ -49,9 +52,15 @@ void process() { if(compute){
 	// Called every frame on existing particles (according to the Fixed FPS property).
 	uint alt_seed = hash(NUMBER + uint(TIME*hash_time_constant) + uint(1) + RANDOM_SEED);
 	// color change before transform for cooler effect, move to bottom for uniform change
-	COLOR = vec4(abs(sin(TIME*2.0))*(TRANSFORM[3].x+1200.0*1.5)/2400.0,
-				abs(cos(TIME*2.0))*(TRANSFORM[3].y+650.0*1.0)/1300.0,
-				abs(sin(TIME*0.2)*1.2), 1.0);
+	//COLOR = vec4(abs(sin(TIME*2.0))*(TRANSFORM[3].x+1200.0*1.5)/2400.0,
+				//abs(cos(TIME*2.0))*(TRANSFORM[3].y+650.0*1.0)/1300.0,
+				//abs(sin(TIME*0.2)*1.2), 0.35);
+	COLOR = vec4(
+		(1200.0-abs(TRANSFORM[3].x))*red/1200.0,
+		(650.0-abs(TRANSFORM[3].y))*green/650.0,
+		blue,
+		0.35
+	);
 	int affine_index = 0;
 	mat3 affine_arr[] = {affine_0, affine_1, affine_2, affine_3,
 						affine_4, affine_5, affine_6, affine_7};

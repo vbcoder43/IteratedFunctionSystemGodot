@@ -85,3 +85,21 @@ func _on_timer_timeout():
 	if($CanvasLayer/CheckButton.button_pressed):
 		generate_affines()
 		apply_affines()
+
+
+func _on_h_slider_value_changed(value):
+	$CanvasLayer/Label4.text = "Blue: " + str(value)
+	for i in range(len(batch)):
+		batch[i].process_material.set_shader_parameter("blue", value)
+
+
+func _on_h_sliderred_value_changed(value):
+	$CanvasLayer/Label2.text = "Red: " + str(value)
+	for i in range(len(batch)):
+		batch[i].process_material.set_shader_parameter("red", value)
+
+
+func _on_h_slider_2_value_changed(value):
+	$CanvasLayer/Label3.text = "Green: " + str(value)
+	for i in range(len(batch)):
+		batch[i].process_material.set_shader_parameter("green", value)
