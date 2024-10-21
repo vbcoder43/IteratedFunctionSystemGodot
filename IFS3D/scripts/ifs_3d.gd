@@ -4,7 +4,7 @@ extends Node3D
 @onready var batch := [$ifs1]
 var compute := true
 @export var gen_type := 0
-@export var function_count := 3
+@export var function_count := 5
 
 @export var jump_ratio_min := 0.5
 @export var jump_ratio_max := 0.5
@@ -14,8 +14,8 @@ var compute := true
 @export var scaling_max := Vector3.ZERO
 @export var shear_min := Vector3.ZERO
 @export var shear_max := Vector3.ZERO
-@export var rotation_deg_min := 0.0
-@export var rotation_deg_max := 0.0
+@export var rotation_deg_min := Vector3.ZERO
+@export var rotation_deg_max := Vector3.ZERO
 
 var affine_arr := [Transform3D.IDENTITY, Transform3D.IDENTITY, Transform3D.IDENTITY,
 				Transform3D.IDENTITY, Transform3D.IDENTITY, Transform3D.IDENTITY,
@@ -38,26 +38,57 @@ func generate_affines():
 	if(gen_type == 1): # freeform
 		for i in range(len(affine_arr)):
 			# translation and scaling
-			affine_arr[i] = Basis(
+			affine_arr[i] = Transform3D(
 				Vector3(randf_range(scaling_min.x, scaling_max.x), 0.0, 0.0),
 				Vector3(0.0, randf_range(scaling_min.y, scaling_max.y), 0.0),
-				Vector3(randf_range(translate_min.x, translate_max.x), randf_range(translate_min.y, translate_max.y), 1.0)
+				Vector3(0.0, 0.0, randf_range(scaling_min.y, scaling_max.y)),
+				Vector3(randf_range(translate_min.x, translate_max.x), randf_range(translate_min.y, translate_max.y),
+				randf_range(translate_min.z, translate_max.z))
 				)
 			# shears combined (mat3 formation precalculated)
-			var shear_h = randf_range(shear_min.y, shear_max.y)
-			var shear_v = randf_range(shear_min.x, shear_max.x)
-			affine_arr[i] *= Basis(
-				Vector3(1.0, shear_h, 0.0),
-				Vector3(shear_v, shear_h*shear_v+1, 0.0),
-				Vector3(0.0, 0.0, 1.0)
+			var shear_x = randf_range(shear_min.x, shear_max.x)
+			var shear_y = randf_range(shear_min.y, shear_max.y)
+			var shear_z = randf_range(shear_min.z, shear_max.z)
+			# Sx
+			affine_arr[i] *= Transform3D(
+				Vector3(1.0, 0.0, 0.0),
+				Vector3(shear_y, 1.0, 0.0),
+				Vector3(shear_z, 0.0, 1.0),
+				Vector3(0.0, 0.0, 0.0)
+			)
+			# Sy
+			affine_arr[i] *= Transform3D(
+				Vector3(1.0, shear_x, 0.0),
+				Vector3(0.0, 1.0, 0.0),
+				Vector3(0.0, shear_z, 1.0),
+				Vector3(0.0, 0.0, 0.0)
+			)
+			# Sz
+			affine_arr[i] *= Transform3D(
+				Vector3(1.0, 0.0, shear_x),
+				Vector3(0.0, 1.0, shear_y),
+				Vector3(0.0, 0.0, 1.0),
+				Vector3(0.0, 0.0, 0.0)
 			)
 			# rotation
-			var angle_sin = sin(randf_range(deg_to_rad(rotation_deg_min),deg_to_rad(rotation_deg_max)))
-			var angle_cos = cos(randf_range(deg_to_rad(rotation_deg_min),deg_to_rad(rotation_deg_max)))
-			affine_arr[i] *= Basis(
-				Vector3(angle_cos, angle_sin, 0.0),
-				Vector3(-angle_sin, angle_cos, 0.0),
-				Vector3(0.0, 0.0, 1.0)
+			var a = randf_range(rotation_deg_min.y, rotation_deg_max.y)
+			var b = randf_range(rotation_deg_min.x, rotation_deg_max.x)
+			var c = randf_range(rotation_deg_min.z, rotation_deg_max.z)
+			var cos_a = cos(a)
+			var cos_b = cos(b)
+			var cos_c = cos(c)
+			var sin_a = sin(a)
+			var sin_b = sin(b)
+			var sin_c = sin(c)
+			affine_arr[i] *= Transform3D(
+				Vector3(cos_a*cos_b, sin_a*cos_b, -sin_b),
+				Vector3(cos_a*sin_b*sin_c-(sin_a*cos_c),
+				sin_a*sin_b*sin_c+(cos_a*cos_c),
+				cos_b*sin_c),
+				Vector3(cos_a*sin_b*cos_c+(sin_a*sin_c),
+				sin_a*sin_b*cos_c-(cos_a*sin_c),
+				cos_b*cos_c),
+				Vector3(0.0, 0.0, 0.0)
 			)
 
 func apply_affines():

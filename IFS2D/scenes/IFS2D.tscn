@@ -234,6 +234,7 @@ visibility_rect = Rect2(-1200, -650, 2400, 1300)
 local_coords = true
 
 [node name="ifs2" type="GPUParticles2D" parent="."]
+visible = false
 amount = 1000000
 process_material = SubResource("ShaderMaterial_gym5p")
 fixed_fps = 60
@@ -241,6 +242,7 @@ visibility_rect = Rect2(-1200, -650, 2400, 1300)
 local_coords = true
 
 [node name="ifs3" type="GPUParticles2D" parent="."]
+visible = false
 amount = 1000000
 process_material = SubResource("ShaderMaterial_ahclp")
 fixed_fps = 60
@@ -248,6 +250,7 @@ visibility_rect = Rect2(-1200, -650, 2400, 1300)
 local_coords = true
 
 [node name="ifs4" type="GPUParticles2D" parent="."]
+visible = false
 amount = 1000000
 process_material = SubResource("ShaderMaterial_psvqa")
 fixed_fps = 60
@@ -255,6 +258,7 @@ visibility_rect = Rect2(-1200, -650, 2400, 1300)
 local_coords = true
 
 [node name="ifs5" type="GPUParticles2D" parent="."]
+visible = false
 amount = 1000000
 process_material = SubResource("ShaderMaterial_n764r")
 fixed_fps = 60

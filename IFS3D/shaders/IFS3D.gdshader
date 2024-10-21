@@ -52,15 +52,15 @@ void process() { if(compute){
 	// Called every frame on existing particles (according to the Fixed FPS property).
 	uint alt_seed = hash(NUMBER + uint(TIME*hash_time_constant) + uint(1) + RANDOM_SEED);
 	// color change before transform for cooler effect, move to bottom for uniform change
-	//COLOR = vec4(abs(sin(TIME*2.0))*(TRANSFORM[3].x+1200.0*1.5)/2400.0,
-				//abs(cos(TIME*2.0))*(TRANSFORM[3].y+650.0*1.0)/1300.0,
-				//abs(sin(TIME*0.2)*1.2), 0.35);
-	COLOR = vec4(
-		(1200.0-abs(TRANSFORM[3].x))*red/1200.0,
-		(650.0-abs(TRANSFORM[3].y))*green/650.0,
-		blue,
-		0.35
-	);
+	COLOR = vec4(abs(sin(TIME*2.0))*(TRANSFORM[3].x+1200.0*1.5)/2400.0,
+				abs(cos(TIME*2.0))*(TRANSFORM[3].y+650.0*1.0)/1300.0,
+				abs(sin(TIME*0.2)*1.2), 0.35);
+	//COLOR = vec4(
+		//(1200.0-abs(TRANSFORM[3].x))*red/1200.0,
+		//(650.0-abs(TRANSFORM[3].y))*green/650.0,
+		//blue,
+		//0.35
+	//);
 	int affine_index = 0;
 	mat4 affine_arr[] = {affine_0, affine_1, affine_2, affine_3,
 						affine_4, affine_5, affine_6, affine_7};
@@ -70,4 +70,5 @@ void process() { if(compute){
 	float decay = 250.0;
 	vec3 dest = (affine_arr[affine_index] * TRANSFORM[3].xyzw).xyz;
 	TRANSFORM[3].xyz = dest;
+	
 }}
