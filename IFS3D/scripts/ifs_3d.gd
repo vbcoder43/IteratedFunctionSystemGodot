@@ -2,22 +2,27 @@
 extends Node3D
 
 @onready var batch := [$ifs1]
-var compute := true
-@export var gen_type := 0
-@export var function_count := 5
+@export var compute := true
+@export var gen_type : int
+@export var function_count : float
+var acc_time := 0.0
+@export var decay_rate : float
+@export var jump_ratio_min : float
+@export var jump_ratio_max : float
+@export var translate_min : Vector3
+@export var translate_max : Vector3
+@export var scaling_min : Vector3
+@export var scaling_max : Vector3
+@export var shear_x_min : Vector3
+@export var shear_x_max : Vector3
+@export var shear_y_min : Vector3
+@export var shear_y_max : Vector3
+@export var shear_z_min : Vector3
+@export var shear_z_max : Vector3
+@export var rotation_deg_min : Vector3
+@export var rotation_deg_max : Vector3
 
-@export var jump_ratio_min := 0.5
-@export var jump_ratio_max := 0.5
-@export var translate_min := Vector3.ZERO
-@export var translate_max := Vector3.ZERO
-@export var scaling_min := Vector3.ZERO
-@export var scaling_max := Vector3.ZERO
-@export var shear_min := Vector3.ZERO
-@export var shear_max := Vector3.ZERO
-@export var rotation_deg_min := Vector3.ZERO
-@export var rotation_deg_max := Vector3.ZERO
-
-var affine_arr := [Transform3D.IDENTITY, Transform3D.IDENTITY, Transform3D.IDENTITY,
+@onready var affine_arr := [Transform3D.IDENTITY, Transform3D.IDENTITY, Transform3D.IDENTITY,
 				Transform3D.IDENTITY, Transform3D.IDENTITY, Transform3D.IDENTITY,
 				Transform3D.IDENTITY, Transform3D.IDENTITY]
 var affine_names := ["affine_0", "affine_1", "affine_2", "affine_3",
@@ -50,27 +55,30 @@ func generate_affines():
 				randf_range(translate_min.z, translate_max.z))
 				)
 			# shears combined (mat3 formation precalculated)
-			var shear_x = randf_range(shear_min.x, shear_max.x)
-			var shear_y = randf_range(shear_min.y, shear_max.y)
-			var shear_z = randf_range(shear_min.z, shear_max.z)
+			var shear_xy = randf_range(shear_x_min.y, shear_x_max.y)
+			var shear_xz = randf_range(shear_x_min.z, shear_x_max.z)
+			var shear_yx = randf_range(shear_y_min.x, shear_y_max.x)
+			var shear_yz = randf_range(shear_y_min.z, shear_y_max.z)
+			var shear_zx = randf_range(shear_z_min.x, shear_z_max.x)
+			var shear_zy = randf_range(shear_z_min.y, shear_z_max.y)
 			# Sx
 			affine_arr[i] *= Transform3D(
 				Vector3(1.0, 0.0, 0.0),
-				Vector3(shear_y, 1.0, 0.0),
-				Vector3(shear_z, 0.0, 1.0),
+				Vector3(shear_xy, 1.0, 0.0),
+				Vector3(shear_xz, 0.0, 1.0),
 				Vector3(0.0, 0.0, 0.0)
 			)
 			# Sy
 			affine_arr[i] *= Transform3D(
-				Vector3(1.0, shear_x, 0.0),
+				Vector3(1.0, shear_yx, 0.0),
 				Vector3(0.0, 1.0, 0.0),
-				Vector3(0.0, shear_z, 1.0),
+				Vector3(0.0, shear_yz, 1.0),
 				Vector3(0.0, 0.0, 0.0)
 			)
 			# Sz
 			affine_arr[i] *= Transform3D(
-				Vector3(1.0, 0.0, shear_x),
-				Vector3(0.0, 1.0, shear_y),
+				Vector3(1.0, 0.0, shear_zx),
+				Vector3(0.0, 1.0, shear_zy),
 				Vector3(0.0, 0.0, 1.0),
 				Vector3(0.0, 0.0, 0.0)
 			)
@@ -96,9 +104,10 @@ func generate_affines():
 			)
 
 func apply_affines():
+	acc_time = 0.0
 	for i in range(len(batch)):
-		batch[i].process_material.set_shader_parameter("compute", compute)
 		batch[i].process_material.set_shader_parameter("function_count", function_count)
+		batch[i].process_material.set_shader_parameter("decay_rate", decay_rate)
 		for j in range(len(affine_arr)):
 			batch[i].process_material.set_shader_parameter(affine_names[j], affine_arr[j])
 
@@ -109,6 +118,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	acc_time = acc_time + delta
+	for i in range(len(batch)):
+		batch[i].process_material.set_shader_parameter("compute", compute)
+		batch[i].process_material.set_shader_parameter("acc_time", acc_time)
 	InputMap.load_from_project_settings()
 	if(Input.is_action_just_pressed("ui_end") && Engine.is_editor_hint()):
 		generate_affines()

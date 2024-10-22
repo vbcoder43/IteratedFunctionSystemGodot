@@ -5,8 +5,10 @@ uniform sampler2D screen : hint_screen_texture;
 vec3 filt_box_blur() {
 	return vec3(0.0,0.0,0.0);
 }
-
 vec3 filt_kuwahara() {
+	return vec3(0.0,0.0,0.0);
+}
+vec3 filt_sharpen() {
 	return vec3(0.0,0.0,0.0);
 }
 

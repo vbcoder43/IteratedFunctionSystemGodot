@@ -5,7 +5,8 @@ extends Node2D
 var compute := true
 @export var gen_type := 0
 @export var function_count := 3
-
+var acc_time := 0.0
+@export var decay_rate := 4.0
 @export var jump_ratio_min := 0.5
 @export var jump_ratio_max := 0.5
 @export var translate_min := Vector2.ZERO
@@ -63,9 +64,11 @@ func generate_affines():
 			)
 
 func apply_affines():
+	acc_time = 0.0
 	for i in range(len(batch)):
 		batch[i].process_material.set_shader_parameter("compute", compute)
 		batch[i].process_material.set_shader_parameter("function_count", function_count)
+		batch[i].process_material.set_shader_parameter("decay_rate", decay_rate)
 		for j in range(len(affine_arr)):
 			batch[i].process_material.set_shader_parameter(affine_names[j], affine_arr[j])
 
@@ -76,6 +79,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	acc_time = acc_time + delta
+	for i in range(len(batch)):
+		batch[i].process_material.set_shader_parameter("acc_time", acc_time)
 	InputMap.load_from_project_settings()
 	if(Input.is_action_just_pressed("ui_end") && Engine.is_editor_hint()):
 		generate_affines()
@@ -107,3 +113,8 @@ func _on_h_slider_2_value_changed(value):
 	$CanvasLayer/Label3.text = "Green: " + str(value)
 	for i in range(len(batch)):
 		batch[i].process_material.set_shader_parameter("green", value)
+
+
+func _on_h_slider_4_value_changed(value):
+	$CanvasLayer/Label5.text = "Decay Rate: " + str(value)
+	decay_rate = value

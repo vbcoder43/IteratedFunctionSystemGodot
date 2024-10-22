@@ -7,6 +7,7 @@ uniform float green : hint_range(0.0, 1.0, 0.001) = 0.5;
 uniform float blue : hint_range(0.0, 1.0, 0.001) = 0.5;
 group_uniforms affine_transformations;
 uniform uint function_count = 3;
+uniform float decay_rate : hint_range(0.01, 20.0, 0.01) = 4.0;
 uniform mat3 affine_0;
 uniform mat3 affine_1;
 uniform mat3 affine_2;
@@ -15,6 +16,7 @@ uniform mat3 affine_4;
 uniform mat3 affine_5;
 uniform mat3 affine_6;
 uniform mat3 affine_7;
+uniform float acc_time = 0.0;
 
 group_uniforms randomness;
 uniform float hash_time_constant = 10000;
@@ -66,8 +68,7 @@ void process() { if(compute){
 						affine_4, affine_5, affine_6, affine_7};
 
 	affine_index = int(rand_from_seed(alt_seed)*float(function_count)-0.00001);
-	float epsilon = 0.00001;
-	float decay = 250.0;
 	vec2 dest = (affine_arr[affine_index] * TRANSFORM[3].xyw).xy;
-	TRANSFORM[3].xy = dest;
+	TRANSFORM[3].xy = dest + (TRANSFORM[3].xy - dest) * exp(-decay_rate*(acc_time));
+	//TRANSFORM[3].xy = dest;
 }}

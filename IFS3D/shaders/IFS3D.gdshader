@@ -7,6 +7,7 @@ uniform float green : hint_range(0.0, 1.0, 0.001) = 0.5;
 uniform float blue : hint_range(0.0, 1.0, 0.001) = 0.5;
 group_uniforms affine_transformations;
 uniform uint function_count = 3;
+uniform float decay_rate : hint_range(0.01, 20.0, 0.01) = 4.0;
 uniform mat4 affine_0;
 uniform mat4 affine_1;
 uniform mat4 affine_2;
@@ -15,6 +16,7 @@ uniform mat4 affine_4;
 uniform mat4 affine_5;
 uniform mat4 affine_6;
 uniform mat4 affine_7;
+uniform float acc_time = 0.0;
 
 group_uniforms randomness;
 uniform float hash_time_constant = 10000;
@@ -51,16 +53,10 @@ void start() {
 void process() { if(compute){
 	// Called every frame on existing particles (according to the Fixed FPS property).
 	uint alt_seed = hash(NUMBER + uint(TIME*hash_time_constant) + uint(1) + RANDOM_SEED);
-	// color change before transform for cooler effect, move to bottom for uniform change
-	COLOR = vec4(abs(sin(TIME*2.0))*(TRANSFORM[3].x+1200.0*1.5)/2400.0,
-				abs(cos(TIME*2.0))*(TRANSFORM[3].y+650.0*1.0)/1300.0,
-				abs(sin(TIME*0.2)*1.2), 0.35);
-	//COLOR = vec4(
-		//(1200.0-abs(TRANSFORM[3].x))*red/1200.0,
-		//(650.0-abs(TRANSFORM[3].y))*green/650.0,
-		//blue,
-		//0.35
-	//);
+	// needs Use as Albedo set in particle texture
+	// ALBEDO = COLOR.rgb
+	// setting to unshaded alongside transparency=alpha gives massive boost to performance
+	
 	int affine_index = 0;
 	mat4 affine_arr[] = {affine_0, affine_1, affine_2, affine_3,
 						affine_4, affine_5, affine_6, affine_7};
@@ -69,6 +65,14 @@ void process() { if(compute){
 	float epsilon = 0.00001;
 	float decay = 250.0;
 	vec3 dest = (affine_arr[affine_index] * TRANSFORM[3]).xyz;
-	TRANSFORM[3].xyz = dest;
-	
+	TRANSFORM[3].xyz = dest + (TRANSFORM[3].xyz - dest) * exp(-decay_rate*(acc_time));
+	COLOR = vec4(
+		1.0-smoothstep(0.0,1.0,abs(TRANSFORM[3].x/10.0)),
+		1.0-smoothstep(0.0,1.0,abs(TRANSFORM[3].z/20.0)),
+		1.0-smoothstep(0.0,1.0,abs(TRANSFORM[3].y/20.0)),
+		1.0
+	);
 }}
+
+
+
