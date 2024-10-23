@@ -56,7 +56,7 @@ void process() { if(compute){
 	// needs Use as Albedo set in particle texture
 	// ALBEDO = COLOR.rgb
 	// setting to unshaded alongside transparency=alpha gives massive boost to performance
-	
+
 	int affine_index = 0;
 	mat4 affine_arr[] = {affine_0, affine_1, affine_2, affine_3,
 						affine_4, affine_5, affine_6, affine_7};

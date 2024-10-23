@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cfssnrn5n22je"]
+[gd_scene load_steps=7 format=3 uid="uid://cfssnrn5n22je"]
 
 [ext_resource type="Shader" path="res://IFS2D/shaders/postfx2D.gdshader" id="1_ntcmr"]
 [ext_resource type="Script" path="res://IFS2D/scripts/ifs_2d.gd" id="1_spt0n"]
@@ -17,92 +17,16 @@ shader_parameter/green = 0.5
 shader_parameter/blue = 0.5
 shader_parameter/function_count = 5
 shader_parameter/decay_rate = 4.0
-shader_parameter/affine_0 = Basis(0.360567, -0.26187, 129.51, 0.449206, 0.325327, 38.9641, 0, 0, 1)
-shader_parameter/affine_1 = Basis(0.341873, -0.47706, 279.232, 0.469437, 0.284585, -36.9526, 0, 0, 1)
-shader_parameter/affine_2 = Basis(0.391269, 0.224909, 391.973, -0.403465, 0.255191, -87.6828, 0, 0, 1)
-shader_parameter/affine_3 = Basis(0.599133, -0.312172, 247.42, 0.21254, 0.446536, -95.1883, 0, 0, 1)
-shader_parameter/affine_4 = Basis(0.374215, 0.217268, 34.9775, -0.514499, 0.342973, -46.906, 0, 0, 1)
-shader_parameter/affine_5 = Basis(0.499371, -0.151303, 79.8868, 0.368786, 0.565078, 116.191, 0, 0, 1)
-shader_parameter/affine_6 = Basis(0.504244, 0.238462, -67.9379, -0.158683, 0.423805, 93.483, 0, 0, 1)
-shader_parameter/affine_7 = Basis(0.485296, 0.325862, -31.7682, -0.29867, 0.467239, 8.81065, 0, 0, 1)
-shader_parameter/acc_time = 1.41621
+shader_parameter/affine_0 = Basis(0.420096, -0.26228, 348.939, 0.291791, 0.537287, -47.2452, 0, 0, 1)
+shader_parameter/affine_1 = Basis(0.166699, 0.480384, -412.528, -0.564984, 0.198044, 96.4172, 0, 0, 1)
+shader_parameter/affine_2 = Basis(0.512744, 0.348224, 333.29, -0.19321, 0.41536, -14.5148, 0, 0, 1)
+shader_parameter/affine_3 = Basis(0.383358, -0.579491, 60.2239, 0.415973, 0.26657, 110.281, 0, 0, 1)
+shader_parameter/affine_4 = Basis(0.699636, 0.0904011, 117.131, 0.0973281, 0.736194, -0.835239, 0, 0, 1)
+shader_parameter/affine_5 = Basis(0.344219, -0.336813, 12.8926, 0.341567, 0.525204, -5.89626, 0, 0, 1)
+shader_parameter/affine_6 = Basis(0.429663, -0.244613, 5.30164, 0.313477, 0.507626, -34.1048, 0, 0, 1)
+shader_parameter/affine_7 = Basis(0.482535, -0.422646, 139.142, 0.360172, 0.413916, 53.3924, 0, 0, 1)
+shader_parameter/acc_time = 4.27835
 shader_parameter/hash_time_constant = 10000.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_gym5p"]
-shader = ExtResource("2_uy6ol")
-shader_parameter/compute = true
-shader_parameter/red = 0.5
-shader_parameter/green = 0.5
-shader_parameter/blue = 0.5
-shader_parameter/function_count = 5
-shader_parameter/decay_rate = 4.0
-shader_parameter/affine_0 = Basis(0.360567, -0.26187, 129.51, 0.449206, 0.325327, 38.9641, 0, 0, 1)
-shader_parameter/affine_1 = Basis(0.341873, -0.47706, 279.232, 0.469437, 0.284585, -36.9526, 0, 0, 1)
-shader_parameter/affine_2 = Basis(0.391269, 0.224909, 391.973, -0.403465, 0.255191, -87.6828, 0, 0, 1)
-shader_parameter/affine_3 = Basis(0.599133, -0.312172, 247.42, 0.21254, 0.446536, -95.1883, 0, 0, 1)
-shader_parameter/affine_4 = Basis(0.374215, 0.217268, 34.9775, -0.514499, 0.342973, -46.906, 0, 0, 1)
-shader_parameter/affine_5 = Basis(0.499371, -0.151303, 79.8868, 0.368786, 0.565078, 116.191, 0, 0, 1)
-shader_parameter/affine_6 = Basis(0.504244, 0.238462, -67.9379, -0.158683, 0.423805, 93.483, 0, 0, 1)
-shader_parameter/affine_7 = Basis(0.485296, 0.325862, -31.7682, -0.29867, 0.467239, 8.81065, 0, 0, 1)
-shader_parameter/acc_time = 1.41621
-shader_parameter/hash_time_constant = 23455.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ahclp"]
-shader = ExtResource("2_uy6ol")
-shader_parameter/compute = true
-shader_parameter/red = 0.5
-shader_parameter/green = 0.5
-shader_parameter/blue = 0.5
-shader_parameter/function_count = 5
-shader_parameter/decay_rate = 4.0
-shader_parameter/affine_0 = Basis(0.360567, -0.26187, 129.51, 0.449206, 0.325327, 38.9641, 0, 0, 1)
-shader_parameter/affine_1 = Basis(0.341873, -0.47706, 279.232, 0.469437, 0.284585, -36.9526, 0, 0, 1)
-shader_parameter/affine_2 = Basis(0.391269, 0.224909, 391.973, -0.403465, 0.255191, -87.6828, 0, 0, 1)
-shader_parameter/affine_3 = Basis(0.599133, -0.312172, 247.42, 0.21254, 0.446536, -95.1883, 0, 0, 1)
-shader_parameter/affine_4 = Basis(0.374215, 0.217268, 34.9775, -0.514499, 0.342973, -46.906, 0, 0, 1)
-shader_parameter/affine_5 = Basis(0.499371, -0.151303, 79.8868, 0.368786, 0.565078, 116.191, 0, 0, 1)
-shader_parameter/affine_6 = Basis(0.504244, 0.238462, -67.9379, -0.158683, 0.423805, 93.483, 0, 0, 1)
-shader_parameter/affine_7 = Basis(0.485296, 0.325862, -31.7682, -0.29867, 0.467239, 8.81065, 0, 0, 1)
-shader_parameter/acc_time = 1.41621
-shader_parameter/hash_time_constant = 34568.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_psvqa"]
-shader = ExtResource("2_uy6ol")
-shader_parameter/compute = true
-shader_parameter/red = 0.5
-shader_parameter/green = 0.5
-shader_parameter/blue = 0.5
-shader_parameter/function_count = 5
-shader_parameter/decay_rate = 4.0
-shader_parameter/affine_0 = Basis(0.360567, -0.26187, 129.51, 0.449206, 0.325327, 38.9641, 0, 0, 1)
-shader_parameter/affine_1 = Basis(0.341873, -0.47706, 279.232, 0.469437, 0.284585, -36.9526, 0, 0, 1)
-shader_parameter/affine_2 = Basis(0.391269, 0.224909, 391.973, -0.403465, 0.255191, -87.6828, 0, 0, 1)
-shader_parameter/affine_3 = Basis(0.599133, -0.312172, 247.42, 0.21254, 0.446536, -95.1883, 0, 0, 1)
-shader_parameter/affine_4 = Basis(0.374215, 0.217268, 34.9775, -0.514499, 0.342973, -46.906, 0, 0, 1)
-shader_parameter/affine_5 = Basis(0.499371, -0.151303, 79.8868, 0.368786, 0.565078, 116.191, 0, 0, 1)
-shader_parameter/affine_6 = Basis(0.504244, 0.238462, -67.9379, -0.158683, 0.423805, 93.483, 0, 0, 1)
-shader_parameter/affine_7 = Basis(0.485296, 0.325862, -31.7682, -0.29867, 0.467239, 8.81065, 0, 0, 1)
-shader_parameter/acc_time = 1.41621
-shader_parameter/hash_time_constant = 48564.0
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_n764r"]
-shader = ExtResource("2_uy6ol")
-shader_parameter/compute = true
-shader_parameter/red = 0.5
-shader_parameter/green = 0.5
-shader_parameter/blue = 0.5
-shader_parameter/function_count = 5
-shader_parameter/decay_rate = 4.0
-shader_parameter/affine_0 = Basis(0.360567, -0.26187, 129.51, 0.449206, 0.325327, 38.9641, 0, 0, 1)
-shader_parameter/affine_1 = Basis(0.341873, -0.47706, 279.232, 0.469437, 0.284585, -36.9526, 0, 0, 1)
-shader_parameter/affine_2 = Basis(0.391269, 0.224909, 391.973, -0.403465, 0.255191, -87.6828, 0, 0, 1)
-shader_parameter/affine_3 = Basis(0.599133, -0.312172, 247.42, 0.21254, 0.446536, -95.1883, 0, 0, 1)
-shader_parameter/affine_4 = Basis(0.374215, 0.217268, 34.9775, -0.514499, 0.342973, -46.906, 0, 0, 1)
-shader_parameter/affine_5 = Basis(0.499371, -0.151303, 79.8868, 0.368786, 0.565078, 116.191, 0, 0, 1)
-shader_parameter/affine_6 = Basis(0.504244, 0.238462, -67.9379, -0.158683, 0.423805, 93.483, 0, 0, 1)
-shader_parameter/affine_7 = Basis(0.485296, 0.325862, -31.7682, -0.29867, 0.467239, 8.81065, 0, 0, 1)
-shader_parameter/acc_time = 1.41621
-shader_parameter/hash_time_constant = 65451.0
 
 [node name="Ifs2d" type="Node2D"]
 script = ExtResource("1_spt0n")
@@ -269,34 +193,6 @@ text = "Decay Rate: 4.0
 material = SubResource("ShaderMaterial_nxpku")
 amount = 1000000
 process_material = SubResource("ShaderMaterial_nk2db")
-fixed_fps = 60
-visibility_rect = Rect2(-1200, -650, 2400, 1300)
-local_coords = true
-
-[node name="ifs2" type="GPUParticles2D" parent="."]
-amount = 1000000
-process_material = SubResource("ShaderMaterial_gym5p")
-fixed_fps = 60
-visibility_rect = Rect2(-1200, -650, 2400, 1300)
-local_coords = true
-
-[node name="ifs3" type="GPUParticles2D" parent="."]
-amount = 1000000
-process_material = SubResource("ShaderMaterial_ahclp")
-fixed_fps = 60
-visibility_rect = Rect2(-1200, -650, 2400, 1300)
-local_coords = true
-
-[node name="ifs4" type="GPUParticles2D" parent="."]
-amount = 1000000
-process_material = SubResource("ShaderMaterial_psvqa")
-fixed_fps = 60
-visibility_rect = Rect2(-1200, -650, 2400, 1300)
-local_coords = true
-
-[node name="ifs5" type="GPUParticles2D" parent="."]
-amount = 1000000
-process_material = SubResource("ShaderMaterial_n764r")
 fixed_fps = 60
 visibility_rect = Rect2(-1200, -650, 2400, 1300)
 local_coords = true

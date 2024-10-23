@@ -11,7 +11,7 @@ shader_parameter/red = 0.5
 shader_parameter/green = 0.5
 shader_parameter/blue = 0.5
 shader_parameter/function_count = 3
-shader_parameter/decay_rate = 8.0
+shader_parameter/decay_rate = 4.0
 shader_parameter/affine_0 = null
 shader_parameter/affine_1 = null
 shader_parameter/affine_2 = null
@@ -20,7 +20,7 @@ shader_parameter/affine_4 = null
 shader_parameter/affine_5 = null
 shader_parameter/affine_6 = null
 shader_parameter/affine_7 = null
-shader_parameter/acc_time = 125.034
+shader_parameter/acc_time = 28.8953
 shader_parameter/hash_time_constant = 10000.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ldqjk"]
@@ -49,14 +49,14 @@ glow_blend_mode = 1
 [node name="Ifs3d" type="Node3D"]
 script = ExtResource("1_28hu1")
 gen_type = 1
-function_count = 3.0
+function_count = 5.0
 decay_rate = 4.0
 jump_ratio_min = 0.5
 jump_ratio_max = 0.5
 translate_min = Vector3(-5, -5, -5)
 translate_max = Vector3(5, 5, 5)
 scaling_min = Vector3(0.42, 0.42, 0.42)
-scaling_max = Vector3(0.72, 0.7, 0.72)
+scaling_max = Vector3(0.72, 0.72, 0.72)
 shear_x_min = Vector3(0, -0.1, -0.1)
 shear_x_max = Vector3(0, 0.1, 0.1)
 shear_y_min = Vector3(-0.1, 0, -0.1)

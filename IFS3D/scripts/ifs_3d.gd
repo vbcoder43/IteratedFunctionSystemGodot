@@ -1,7 +1,7 @@
 @tool
 extends Node3D
 
-@onready var batch := [$ifs1]
+@onready var ifs = $ifs1
 @export var compute := true
 @export var gen_type : int
 @export var function_count : float
@@ -105,23 +105,21 @@ func generate_affines():
 
 func apply_affines():
 	acc_time = 0.0
-	for i in range(len(batch)):
-		batch[i].process_material.set_shader_parameter("function_count", function_count)
-		batch[i].process_material.set_shader_parameter("decay_rate", decay_rate)
-		for j in range(len(affine_arr)):
-			batch[i].process_material.set_shader_parameter(affine_names[j], affine_arr[j])
+	ifs.process_material.set_shader_parameter("function_count", function_count)
+	ifs.process_material.set_shader_parameter("decay_rate", decay_rate)
+	for j in range(len(affine_arr)):
+		ifs.process_material.set_shader_parameter(affine_names[j], affine_arr[j])
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in batch:
-		i.visible = true
+	ifs.visible = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	acc_time = acc_time + delta
-	for i in range(len(batch)):
-		batch[i].process_material.set_shader_parameter("compute", compute)
-		batch[i].process_material.set_shader_parameter("acc_time", acc_time)
+	ifs.process_material.set_shader_parameter("compute", compute)
+	if(compute):
+		acc_time = acc_time + delta
+		ifs.process_material.set_shader_parameter("acc_time", acc_time)
 	InputMap.load_from_project_settings()
 	if(Input.is_action_just_pressed("ui_end") && Engine.is_editor_hint()):
 		generate_affines()
@@ -139,17 +137,14 @@ func _on_timer_timeout():
 
 func _on_h_slider_value_changed(value):
 	$CanvasLayer/Label4.text = "Blue: " + str(value)
-	for i in range(len(batch)):
-		batch[i].process_material.set_shader_parameter("blue", value)
+	ifs.process_material.set_shader_parameter("blue", value)
 
 
 func _on_h_sliderred_value_changed(value):
 	$CanvasLayer/Label2.text = "Red: " + str(value)
-	for i in range(len(batch)):
-		batch[i].process_material.set_shader_parameter("red", value)
+	ifs.process_material.set_shader_parameter("red", value)
 
 
 func _on_h_slider_2_value_changed(value):
 	$CanvasLayer/Label3.text = "Green: " + str(value)
-	for i in range(len(batch)):
-		batch[i].process_material.set_shader_parameter("green", value)
+	ifs.process_material.set_shader_parameter("green", value)
