@@ -2,6 +2,7 @@
 extends Node3D
 
 @onready var ifs = $ifs1
+@onready var ao = $Camera3D/occlusion
 @export var compute := true
 @export var gen_type : int
 @export var function_count : float
@@ -127,21 +128,10 @@ func _process(delta):
 
 
 func _on_timer_timeout():
-	if($CanvasLayer/CheckButton.button_pressed):
+	if($CanvasLayer/autogen.button_pressed):
 		generate_affines()
 		apply_affines()
-
-
-func _on_h_slider_value_changed(value):
-	$CanvasLayer/Label4.text = "Blue: " + str(value)
-	ifs.process_material.set_shader_parameter("blue", value)
-
-
-func _on_h_sliderred_value_changed(value):
-	$CanvasLayer/Label2.text = "Red: " + str(value)
-	ifs.process_material.set_shader_parameter("red", value)
-
-
-func _on_h_slider_2_value_changed(value):
-	$CanvasLayer/Label3.text = "Green: " + str(value)
-	ifs.process_material.set_shader_parameter("green", value)
+func _on_check_button_2_toggled(toggled_on):
+	ao.visible = toggled_on
+func _on_tint_toggled(toggled_on):
+	ao.mesh.material.set_shader_parameter("tint", toggled_on)

@@ -18,6 +18,10 @@ uniform float acc_time = 0.0;
 group_uniforms randomness;
 uniform float hash_time_constant;
 
+group_uniforms occlusion;
+uniform float occlusion_value;
+uniform float occlusion_exponent;
+
 // Godot's own random number generator converted from particleprocessmaterial
 float rand_from_seed(inout uint seed) {
 	int k;
@@ -68,4 +72,6 @@ void process() { if(compute){
 	vec3 dest = (affine_arr[affine_index] * TRANSFORM[3]).xyz;
 	TRANSFORM[3].xyz = dest + (TRANSFORM[3].xyz - dest) * exp(-decay_rate*(acc_time));
 	TRANSFORM[3].xyz = clamp(TRANSFORM[3].xyz,-15.0,15.0);
+	// apply occlusion
+
 }}

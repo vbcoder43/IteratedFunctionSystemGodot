@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://qgr7qt2hqcok"]
+[gd_scene load_steps=12 format=3 uid="uid://qgr7qt2hqcok"]
 
 [ext_resource type="Script" path="res://IFS3D/scripts/ifs_3d.gd" id="1_28hu1"]
 [ext_resource type="Shader" path="res://IFS3D/shaders/IFS3D.gdshader" id="2_5251f"]
 [ext_resource type="Script" path="res://IFS3D/scripts/camera.gd" id="3_hoa23"]
+[ext_resource type="Shader" path="res://IFS3D/shaders/occlusion.gdshader" id="4_n060o"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xir4o"]
 shader = ExtResource("2_5251f")
@@ -11,34 +12,56 @@ shader_parameter/red = 0.0
 shader_parameter/green = 1.0
 shader_parameter/blue = 1.0
 shader_parameter/function_count = 5
-shader_parameter/decay_rate = 8.0
+shader_parameter/decay_rate = 2.0
 shader_parameter/affine_0 = null
 shader_parameter/affine_1 = null
 shader_parameter/affine_2 = null
 shader_parameter/affine_3 = null
 shader_parameter/affine_4 = null
-shader_parameter/acc_time = 30.6271
+shader_parameter/acc_time = 385.77
 shader_parameter/hash_time_constant = 123456.0
+shader_parameter/occlusion_value = null
+shader_parameter/occlusion_exponent = null
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lgura"]
-transparency = 1
-depth_draw_mode = 1
 shading_mode = 0
 specular_mode = 2
 disable_ambient_light = true
 disable_fog = true
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-billboard_mode = 1
 
 [sub_resource type="PointMesh" id="PointMesh_jta0l"]
 material = SubResource("StandardMaterial3D_lgura")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_567tv"]
+frequency = 0.101
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ys7cs"]
+noise = SubResource("FastNoiseLite_567tv")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nm3co"]
+render_priority = 0
+shader = ExtResource("4_n060o")
+shader_parameter/samples = 16
+shader_parameter/area = 0.0075
+shader_parameter/radius = 0.0002
+shader_parameter/falloff = 1e-06
+shader_parameter/col_bright = Color(0.19, 0.784, 1, 1)
+shader_parameter/col_dark = Color(1, 1, 1, 1)
+shader_parameter/tint = true
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_ys7cs")
+
+[sub_resource type="QuadMesh" id="QuadMesh_avo4b"]
+material = SubResource("ShaderMaterial_nm3co")
+flip_faces = true
+size = Vector2(2, 2)
 
 [node name="Ifs3d" type="Node3D"]
 script = ExtResource("1_28hu1")
 gen_type = 1
 function_count = 5.0
-decay_rate = 8.0
+decay_rate = 2.0
 jump_ratio_min = 0.5
 jump_ratio_max = 0.5
 translate_min = Vector3(-5, -5, -5)
@@ -56,16 +79,17 @@ rotation_deg_max = Vector3(1, 1, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="CheckButton" type="CheckButton" parent="CanvasLayer"]
-anchors_preset = 1
+[node name="autogen" type="CheckButton" parent="CanvasLayer"]
+anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -288.0
-offset_right = -24.0
-offset_bottom = 73.0
+offset_top = 16.0
+offset_right = -8.0
+offset_bottom = 58.0
 grow_horizontal = 0
 focus_mode = 0
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 24
 text = "AUTO GEN"
 metadata/_edit_use_anchors_ = true
 
@@ -81,95 +105,34 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 24
 text = "PRESS [SPACE] TO GENERATE NEW SET"
 
-[node name="HSlider" type="HSlider" parent="CanvasLayer"]
+[node name="AO" type="CheckButton" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -288.0
+offset_top = 64.0
+offset_right = -8.0
+offset_bottom = 106.0
+grow_horizontal = 0
+focus_mode = 0
+theme_override_font_sizes/font_size = 24
+button_pressed = true
+text = "Ambient Occlusion
+"
+
+[node name="tint" type="CheckButton" parent="CanvasLayer"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -288.0
 offset_top = 112.0
-offset_right = 1.0
-offset_bottom = 128.0
-grow_horizontal = 0
-scale = Vector2(1, 2)
-focus_mode = 0
-max_value = 1.0
-step = 0.001
-value = 1.0
-scrollable = false
-metadata/_edit_use_anchors_ = true
-
-[node name="Label2" type="Label" parent="CanvasLayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -280.0
-offset_top = 72.0
 offset_right = -8.0
-offset_bottom = 106.0
+offset_bottom = 154.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 24
-text = "Red: 1"
-metadata/_edit_use_anchors_ = true
-
-[node name="HSlider2" type="HSlider" parent="CanvasLayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -288.0
-offset_top = 192.0
-offset_right = 1.0
-offset_bottom = 208.0
-grow_horizontal = 0
-scale = Vector2(1, 2)
 focus_mode = 0
-max_value = 1.0
-step = 0.001
-value = 1.0
-scrollable = false
-metadata/_edit_use_anchors_ = true
-
-[node name="Label3" type="Label" parent="CanvasLayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -280.0
-offset_top = 152.0
-offset_right = -8.0
-offset_bottom = 186.0
-grow_horizontal = 0
 theme_override_font_sizes/font_size = 24
-text = "Green: 1"
-metadata/_edit_use_anchors_ = true
-
-[node name="HSlider3" type="HSlider" parent="CanvasLayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -288.0
-offset_top = 272.0
-offset_right = 1.0
-offset_bottom = 288.0
-grow_horizontal = 0
-scale = Vector2(1, 2)
-focus_mode = 0
-max_value = 1.0
-step = 0.001
-value = 1.0
-scrollable = false
-metadata/_edit_use_anchors_ = true
-
-[node name="Label4" type="Label" parent="CanvasLayer"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -280.0
-offset_top = 232.0
-offset_right = -8.0
-offset_bottom = 266.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 24
-text = "Blue: 1"
-metadata/_edit_use_anchors_ = true
+button_pressed = true
+text = "Tint"
 
 [node name="ifs1" type="GPUParticles3D" parent="."]
 amount = 1000000
@@ -179,16 +142,21 @@ process_material = SubResource("ShaderMaterial_xir4o")
 draw_pass_1 = SubResource("PointMesh_jta0l")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.707107, -0.388218, 0.591005, 0, 0.835807, 0.549023, -0.707107, -0.388218, 0.591005, 22.6418, 12.6953, 18.0441)
+transform = Transform3D(-0.353925, -0.434814, 0.828054, 0, 0.88536, 0.464905, -0.935274, 0.164542, -0.313351, 18.2348, 10.2378, -6.90039)
 current = true
 size = 0.907
 script = ExtResource("3_hoa23")
+
+[node name="occlusion" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, -2.98023e-08, 0, 0, 1, -0.150409, -0.169323, -0.318725)
+extra_cull_margin = 16384.0
+ignore_occlusion_culling = true
+mesh = SubResource("QuadMesh_avo4b")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
 
-[connection signal="value_changed" from="CanvasLayer/HSlider" to="." method="_on_h_sliderred_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/HSlider2" to="." method="_on_h_slider_2_value_changed"]
-[connection signal="value_changed" from="CanvasLayer/HSlider3" to="." method="_on_h_slider_value_changed"]
+[connection signal="toggled" from="CanvasLayer/AO" to="." method="_on_check_button_2_toggled"]
+[connection signal="toggled" from="CanvasLayer/tint" to="." method="_on_tint_toggled"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
