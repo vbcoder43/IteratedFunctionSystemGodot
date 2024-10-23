@@ -23,15 +23,12 @@ var acc_time := 0.0
 @export var rotation_deg_max : Vector3
 
 @onready var affine_arr := [Transform3D.IDENTITY, Transform3D.IDENTITY, Transform3D.IDENTITY,
-				Transform3D.IDENTITY, Transform3D.IDENTITY, Transform3D.IDENTITY,
 				Transform3D.IDENTITY, Transform3D.IDENTITY]
-var affine_names := ["affine_0", "affine_1", "affine_2", "affine_3",
-					"affine_4", "affine_5", "affine_6", "affine_7"]
+var affine_names := ["affine_0", "affine_1", "affine_2", "affine_3", "affine_4"]
 
 # 3D affines in godot are column major (Transform3D) but editor shows them as row major
 func generate_affines():
 	if(gen_type == 0): # sierpinskie triangle
-		function_count = 5
 		for i in range(len(affine_arr)):
 			var t = randf_range(jump_ratio_min, jump_ratio_max)
 			affine_arr[i] = Transform3D(
@@ -112,7 +109,7 @@ func apply_affines():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	ifs.visible = true
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

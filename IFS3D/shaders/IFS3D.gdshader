@@ -2,24 +2,21 @@ shader_type particles;
 render_mode disable_velocity, keep_data;
 
 uniform bool compute = true;
-uniform float red : hint_range(0.0, 1.0, 0.001) = 0.5;
-uniform float green : hint_range(0.0, 1.0, 0.001) = 0.5;
-uniform float blue : hint_range(0.0, 1.0, 0.001) = 0.5;
+uniform float red : hint_range(0.0, 1.0, 0.001) = 1.0;
+uniform float green : hint_range(0.0, 1.0, 0.001) = 1.0;
+uniform float blue : hint_range(0.0, 1.0, 0.001) = 1.0;
 group_uniforms affine_transformations;
-uniform uint function_count = 3;
+uniform uint function_count = 5;
 uniform float decay_rate : hint_range(0.01, 20.0, 0.01) = 4.0;
 uniform mat4 affine_0;
 uniform mat4 affine_1;
 uniform mat4 affine_2;
 uniform mat4 affine_3;
 uniform mat4 affine_4;
-uniform mat4 affine_5;
-uniform mat4 affine_6;
-uniform mat4 affine_7;
 uniform float acc_time = 0.0;
 
 group_uniforms randomness;
-uniform float hash_time_constant = 10000;
+uniform float hash_time_constant;
 
 // Godot's own random number generator converted from particleprocessmaterial
 float rand_from_seed(inout uint seed) {
@@ -56,23 +53,19 @@ void process() { if(compute){
 	// needs Use as Albedo set in particle texture
 	// ALBEDO = COLOR.rgb
 	// setting to unshaded alongside transparency=alpha gives massive boost to performance
-
-	int affine_index = 0;
-	mat4 affine_arr[] = {affine_0, affine_1, affine_2, affine_3,
-						affine_4, affine_5, affine_6, affine_7};
-
-	affine_index = int(rand_from_seed(alt_seed)*float(function_count)-0.00001);
-	float epsilon = 0.00001;
-	float decay = 250.0;
-	vec3 dest = (affine_arr[affine_index] * TRANSFORM[3]).xyz;
-	TRANSFORM[3].xyz = dest + (TRANSFORM[3].xyz - dest) * exp(-decay_rate*(acc_time));
+	// depth draw mode always big performance boost
+	//COLOR before transform for cool effect
 	COLOR = vec4(
-		1.0-smoothstep(0.0,1.0,abs(TRANSFORM[3].x/10.0)),
-		1.0-smoothstep(0.0,1.0,abs(TRANSFORM[3].z/20.0)),
-		1.0-smoothstep(0.0,1.0,abs(TRANSFORM[3].y/20.0)),
+		1.0-smoothstep(0.0,1.0,abs(TRANSFORM[3].x*red/10.0)),
+		1.0-smoothstep(0.0,1.0,abs(TRANSFORM[3].z*green/10.0)),
+		1.0-smoothstep(0.0,1.0,abs(TRANSFORM[3].y*blue/10.0)),
 		1.0
 	);
+	int affine_index = 0;
+	mat4 affine_arr[] = {affine_0, affine_1, affine_2, affine_3, affine_4};
+
+	affine_index = int(rand_from_seed(alt_seed)*float(function_count)-0.00001);
+	vec3 dest = (affine_arr[affine_index] * TRANSFORM[3]).xyz;
+	TRANSFORM[3].xyz = dest + (TRANSFORM[3].xyz - dest) * exp(-decay_rate*(acc_time));
+	TRANSFORM[3].xyz = clamp(TRANSFORM[3].xyz,-15.0,15.0);
 }}
-
-
-
