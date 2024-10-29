@@ -18,7 +18,7 @@ shader_parameter/affine_1 = null
 shader_parameter/affine_2 = null
 shader_parameter/affine_3 = null
 shader_parameter/affine_4 = null
-shader_parameter/acc_time = 385.77
+shader_parameter/acc_time = 10.0211
 shader_parameter/hash_time_constant = 123456.0
 shader_parameter/occlusion_value = null
 shader_parameter/occlusion_exponent = null
@@ -30,12 +30,15 @@ disable_ambient_light = true
 disable_fog = true
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
+billboard_mode = 1
+point_size = 0.1
+distance_fade_max_distance = 197.4
 
 [sub_resource type="PointMesh" id="PointMesh_jta0l"]
 material = SubResource("StandardMaterial3D_lgura")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_567tv"]
-frequency = 0.101
+frequency = 1.0
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ys7cs"]
 noise = SubResource("FastNoiseLite_567tv")
@@ -47,8 +50,8 @@ shader_parameter/samples = 16
 shader_parameter/area = 0.0075
 shader_parameter/radius = 0.0002
 shader_parameter/falloff = 1e-06
-shader_parameter/col_bright = Color(0.19, 0.784, 1, 1)
-shader_parameter/col_dark = Color(1, 1, 1, 1)
+shader_parameter/col_bright = Color(1, 0.366667, 0.05, 1)
+shader_parameter/col_dark = Color(0.87, 0.79692, 0.3219, 1)
 shader_parameter/tint = true
 shader_parameter/noise_tex = SubResource("NoiseTexture2D_ys7cs")
 
@@ -64,8 +67,8 @@ function_count = 5.0
 decay_rate = 2.0
 jump_ratio_min = 0.5
 jump_ratio_max = 0.5
-translate_min = Vector3(-5, -5, -5)
-translate_max = Vector3(5, 5, 5)
+translate_min = Vector3(-5, -3, -5)
+translate_max = Vector3(5, 3, 5)
 scaling_min = Vector3(0.42, 0.42, 0.42)
 scaling_max = Vector3(0.72, 0.72, 0.72)
 shear_x_min = Vector3(0, -0.1, -0.1)
@@ -80,7 +83,7 @@ rotation_deg_max = Vector3(1, 1, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="autogen" type="CheckButton" parent="CanvasLayer"]
-anchors_preset = -1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -288.0
@@ -135,7 +138,48 @@ button_pressed = true
 text = "Tint"
 
 [node name="ifs1" type="GPUParticles3D" parent="."]
+visible = false
 amount = 1000000
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ShaderMaterial_xir4o")
+draw_pass_1 = SubResource("PointMesh_jta0l")
+
+[node name="ifs2" type="GPUParticles3D" parent="."]
+visible = false
+amount = 1000000
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ShaderMaterial_xir4o")
+draw_pass_1 = SubResource("PointMesh_jta0l")
+
+[node name="ifs3" type="GPUParticles3D" parent="."]
+visible = false
+amount = 1000000
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ShaderMaterial_xir4o")
+draw_pass_1 = SubResource("PointMesh_jta0l")
+
+[node name="ifs4" type="GPUParticles3D" parent="."]
+visible = false
+amount = 1000000
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ShaderMaterial_xir4o")
+draw_pass_1 = SubResource("PointMesh_jta0l")
+
+[node name="ifs5" type="GPUParticles3D" parent="."]
+visible = false
+amount = 1000000
+fixed_fps = 60
+local_coords = true
+process_material = SubResource("ShaderMaterial_xir4o")
+draw_pass_1 = SubResource("PointMesh_jta0l")
+
+[node name="ifs6" type="GPUParticles3D" parent="."]
+visible = false
+amount = 700000
 fixed_fps = 60
 local_coords = true
 process_material = SubResource("ShaderMaterial_xir4o")

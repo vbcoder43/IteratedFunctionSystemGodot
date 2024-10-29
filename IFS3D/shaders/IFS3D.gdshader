@@ -72,6 +72,4 @@ void process() { if(compute){
 	vec3 dest = (affine_arr[affine_index] * TRANSFORM[3]).xyz;
 	TRANSFORM[3].xyz = dest + (TRANSFORM[3].xyz - dest) * exp(-decay_rate*(acc_time));
 	TRANSFORM[3].xyz = clamp(TRANSFORM[3].xyz,-15.0,15.0);
-	// apply occlusion
-
 }}

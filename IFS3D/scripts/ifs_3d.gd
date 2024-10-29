@@ -126,12 +126,13 @@ func _process(delta):
 		generate_affines()
 		apply_affines()
 
-
 func _on_timer_timeout():
 	if($CanvasLayer/autogen.button_pressed):
 		generate_affines()
 		apply_affines()
+
 func _on_check_button_2_toggled(toggled_on):
 	ao.visible = toggled_on
+
 func _on_tint_toggled(toggled_on):
 	ao.mesh.material.set_shader_parameter("tint", toggled_on)
